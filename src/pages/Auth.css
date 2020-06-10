@@ -1,0 +1,57 @@
+.auth-form {
+  width: 25rem;
+  max-width: 80%;
+  margin: 5rem auto;
+}
+
+.demoUser {
+  border-style: solid;
+  border-radius: 25%;
+  border-width: 2px;
+  border-color: #dddddd;
+  color: rgb(143, 143, 143);
+  /* margin-left: -175px;
+  margin-top: -30px; */
+  padding: 5px;
+  width: 125px;
+  height: 125px;
+}
+
+.demoUser p {
+  line-height: 15px;
+}
+
+.welcome__text {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+}
+
+.welcome__text h4,
+.welcome__text p {
+  margin: 0;
+}
+
+form.signUp__signIn-form,
+form.sign-in-container-form {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px; */
+  /* height: 100%; */
+  text-align: center;
+}
+
+input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 80%;
+}
