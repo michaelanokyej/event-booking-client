@@ -24,6 +24,7 @@ class Events extends Component {
     this.priceElRef = React.createRef();
     this.dateElRef = React.createRef();
     this.descriptionElRef = React.createRef();
+    this.categoryElRef = React.createRef();
   }
 
   componentWillMount = () => {
@@ -43,12 +44,14 @@ class Events extends Component {
     const title = this.titleElRef.current.value;
     const price = +this.priceElRef.current.value;
     const date = this.dateElRef.current.value;
+    const category = this.categoryElRef.current.value;
     const description = this.descriptionElRef.current.value;
 
     if (
       title.trim().length === 0 ||
       price <= 0 ||
       date.trim().length === 0 ||
+      category.trim().length === 0 ||
       description.trim().length === 0
     ) {
       return;
@@ -59,15 +62,17 @@ class Events extends Component {
       price,
       date,
       description,
+      category
     };
     console.log(event);
 
     const requestBody = {
       query: `
-      mutation CreateEvent($title: String!, $description: String!, $price: Float!, $date: String! ) {
-        createEvent(eventInput: {title: $title, description: $description, price: $price, date: $date}) {
+      mutation CreateEvent($title: String!, $description: String!, $category: String!, $price: Float!, $date: String! ) {
+        createEvent(eventInput: {title: $title, description: $description, category: $category, price: $price, date: $date}) {
           _id
           title
+          category
           description
           date
           price
@@ -79,6 +84,7 @@ class Events extends Component {
         price,
         date,
         description,
+        category
       }
     };
 
@@ -99,11 +105,13 @@ class Events extends Component {
         return res.json();
       })
       .then((resData) => {
+        console.log("response:", resData)
         this.setState((prevState) => {
           const updatedEvents = [...prevState.events];
           updatedEvents.push({
             _id: resData.data.createEvent._id,
             title: resData.data.createEvent.title,
+            category: resData.data.createEvent.category,
             description: resData.data.createEvent.description,
             date: resData.data.createEvent.date,
             price: resData.data.createEvent.price,
@@ -128,6 +136,7 @@ class Events extends Component {
           _id
           title
           description
+          category
           date
           price
           creator {
@@ -153,6 +162,7 @@ class Events extends Component {
         return res.json();
       })
       .then((resData) => {
+        console.log(resData.data.events)
         const events = resData.data.events;
         if(this.isActive) {
         this.setState({ events, isLoading: false });
@@ -247,6 +257,14 @@ class Events extends Component {
               <div className="form-control">
                 <label htmlFor="date">Date</label>
                 <input type="datetime-local" id="date" ref={this.dateElRef} />
+              </div>
+              <div className="form-control">
+                <label htmlFor="category">Category</label>
+                <select ref={this.categoryElRef}>
+                  <option value=""></option>
+                  <option value="indoor">InDoor</option>
+                  <option value="outdoor">OutDoor</option>
+                </select>
               </div>
               <div className="form-control">
                 <label htmlFor="description">Description</label>

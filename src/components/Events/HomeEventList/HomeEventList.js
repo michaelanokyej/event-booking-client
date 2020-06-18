@@ -10,7 +10,7 @@ const homeEventList = (props) => {
           return (
             <li key={event._id} className="event">
               <div className="event__item-img">
-                <img src="event-img.jpg" alt="event" />
+                <img src={event.category === "indoor" ? "indoor-event-img.jpg" : "outdoor-event-img.jpg"} alt="event" />
               </div>
               <div className="event__item-content">
                 <h4>{event.title}</h4>

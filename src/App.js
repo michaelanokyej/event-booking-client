@@ -6,6 +6,7 @@ import Events from "./pages/Events";
 import Bookings from "./pages/Bookings";
 import MainNavigation from "./components/Navigation/MainNavigation";
 import AuthContext from "./context/auth-context";
+import Footer from "./components/Footer/Footer"
 
 class App extends Component {
   state = {
@@ -46,6 +47,7 @@ class App extends Component {
                 {this.state.token && (<Route path="/bookings" component={Bookings} />)}
               </Switch>
             </main>
+            <Footer />
           </AuthContext.Provider>
         </React.Fragment>
       </BrowserRouter>

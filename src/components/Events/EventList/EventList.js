@@ -8,6 +8,8 @@ const eventList = (props) => {
       <EventItem
         key={event._id}
         eventId={event._id}
+        description={event.description}
+        category={event.category}
         title={event.title}
         price={event.price}
         date={event.date}
@@ -18,7 +20,7 @@ const eventList = (props) => {
     );
   });
 
-  return <ul className="event__list">{events}</ul>;
+  return <div className="home_event_list"><ul className="event__list">{events}</ul></div>;
 };
 
 export default eventList;

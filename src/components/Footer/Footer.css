@@ -1,0 +1,22 @@
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3.5rem;
+  background: #d6be80;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer a:link {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* footer a:visited {
+  color: green;
+} */

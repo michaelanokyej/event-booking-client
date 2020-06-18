@@ -36,9 +36,20 @@ body {
 
 .form-actions button:hover,
 .form-actions button:active,
+.form-actions button:focus
 .btn:hover,
-.btn:active {
-  background: rgb(31, 98, 97);
-  border-color: rgb(31, 98, 97);
-  color: rgb(152, 197, 195);
+.btn:active,
+.btn:focus {
+  background: #d3c39c;
+  border-color: #d3c39c;
+  color: #0f0c04;
+  outline: none;
+}
+
+input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 80%;
 }

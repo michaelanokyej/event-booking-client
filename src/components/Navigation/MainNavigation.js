@@ -16,17 +16,28 @@ const mainNavigation = (props) => {
             <nav className="main-navigation__items">
               <ul>
                 {!context.token && (
+                  <>
                   <li>
                     <NavLink to="/auth">Auth</NavLink>
                   </li>
+                  {/* <li>
+                  <button onClick={context.logout}>Sign In</button>
+                </li> */}
+                </>
                 )}
-                <li>
+                {/* <li>
                   <NavLink to="/events">Events</NavLink>
-                </li>
+                </li> */}
                 {context.token && (
                   <>
                   <li>
+                  <NavLink to="/events">Events</NavLink>
+                </li>
+                  <li>
                     <NavLink to="/bookings">Bookings</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/me">Profile</NavLink>
                   </li>
                   <li>
                     <button onClick={context.logout}>Logout</button>
