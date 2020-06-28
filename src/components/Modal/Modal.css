@@ -1,6 +1,6 @@
 .modal {
   width: 90%;
-  background: whitesmoke;
+  background: rgb(236, 231, 231);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   position: fixed;
   top: 20vh;
@@ -10,8 +10,8 @@
 
 .modal__header {
   padding: 1rem;
-  background: #d6be80;
-  color: whitesmoke;
+  background: #ED5565;
+  color: rgb(236, 231, 231);
 }
 
 .modal__header h1 {

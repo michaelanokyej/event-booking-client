@@ -3,8 +3,9 @@ import AuthContext from "../context/auth-context";
 import Spinner from "../components/Spinner/Spinner";
 import BookingList from "../components/Bookings/BookingList/BookingList";
 import BookingsChart from "../components/Bookings/BookingsChart/BookingsChart";
-import BookingsControl from "../components/Bookings/BookingsControls/BookingsControls"
-
+import BookingsControl from "../components/Bookings/BookingsControls/BookingsControls";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 class Bookings extends Component {
   state = {
@@ -12,6 +13,8 @@ class Bookings extends Component {
     bookings: [],
     outputType: "list",
   };
+
+  MySwal = withReactContent(Swal);
 
   static contextType = AuthContext;
 
@@ -57,8 +60,13 @@ class Bookings extends Component {
         this.setState({ bookings, isLoading: false });
       })
       .catch((err) => {
-        console.log(err);
         this.setState({ isLoading: false });
+        this.MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Failed!: Something went wrong.",
+          footer: `<p>ERROR: ${" "} ${err}</p>`,
+        });
       });
   };
 
@@ -99,10 +107,20 @@ class Bookings extends Component {
           });
           return { bookings: updatedBookings, isLoading: false };
         });
+        this.MySwal.fire({
+          icon: "success",
+          title: "Cancelled!",
+          text: `Your booking for ${resData.data.cancelBooking.title} has been cancelled`,
+        });
       })
       .catch((err) => {
-        console.log(err);
         this.setState({ isLoading: false });
+        this.MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Failed!: Something went wrong.",
+          footer: `<p>ERROR: ${" "} ${err}</p>`,
+        });
       });
   };
 
@@ -118,19 +136,33 @@ class Bookings extends Component {
     if (!this.state.isLoading) {
       content = (
         <>
-          <BookingsControl activeOutputType={this.state.outputType} onChange={this.changeOutputTypeHandler} />
+          <BookingsControl
+            activeOutputType={this.state.outputType}
+            onChange={this.changeOutputTypeHandler}
+          />
           <div>
             {this.state.outputType === "list" ? (
-              <BookingList bookings={this.state.bookings} onDelete={this.deleteBookingHandler}/>
+              <BookingList
+                bookings={this.state.bookings}
+                onDelete={this.deleteBookingHandler}
+              />
             ) : (
-              <BookingsChart bookings={this.state.bookings}/>
+              <BookingsChart bookings={this.state.bookings} />
             )}
           </div>
         </>
       );
     }
 
-    return <>{content}</>;
+    return (
+      <>
+        {this.state.bookings.length === 0 ? (
+          <h1>You do not have any bookings yet!</h1>
+        ) : (
+          content
+        )}
+      </>
+    );
   }
 }
 

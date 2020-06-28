@@ -7,6 +7,8 @@ import Backdrop from "../components/Backdrop/Backdrop";
 import Spinner from "../components/Spinner/Spinner";
 import { Redirect } from "react-router-dom";
 // import AuthForm from "../components/Auth/AuthForm/AuthForm"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 class Auth extends Component {
   state = {
@@ -18,6 +20,8 @@ class Auth extends Component {
   };
 
   isActive = true;
+
+  MySwal = withReactContent(Swal)
 
   static contextType = AuthContext;
   // I am using references here to reference the input elements
@@ -75,10 +79,15 @@ class Auth extends Component {
         }
       })
       .catch((err) => {
-        console.log(err);
         if (this.isActive) {
           this.setState({ isLoading: false });
         }
+        this.MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Failed!: Something went wrong.',
+          footer: `<p>ERROR: ${" "} ${err}</p>`
+        })
       });
   };
 
@@ -110,6 +119,7 @@ class Auth extends Component {
             userId
             token
             tokenExpiration
+            username
           }
         }
       `,
@@ -118,22 +128,6 @@ class Auth extends Component {
         password,
       },
     };
-    // if (!this.state.isLogin) {
-    //   requestBody = {
-    //     query: `
-    //   mutation CreateUser($email: String!, $password: String!){
-    //     createUser(userInput: {email: $email, password: $password}) {
-    //       _id
-    //       email
-    //     }
-    //   }
-    //   `,
-    //     variables: {
-    //       email,
-    //       password,
-    //     },
-    //   };
-    // }
 
     fetch("http://localhost:5000/graphql", {
       method: "POST",
@@ -144,7 +138,13 @@ class Auth extends Component {
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
-          throw new Error("Failed!: Something went wrong. Please check your input!");
+          this.MySwal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Failed!: Something went wrong.',
+            footer: '<p>Please check your input!</p>'
+          })
+          // throw new Error("Failed!: Something went wrong. Please check your input!");
         }
         return res.json();
       })
@@ -153,12 +153,18 @@ class Auth extends Component {
           this.context.login(
             resData.data.login.token,
             resData.data.login.userId,
-            resData.data.login.tokenExpiration
+            resData.data.login.tokenExpiration,
+            resData.data.login.username
           );
         }
       })
       .catch((err) => {
-        console.log(err);
+        this.MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Failed!: Something went wrong.',
+          footer: `<p>ERROR: ${" "} ${err}</p>`
+        })
       });
   };
 
@@ -187,8 +193,9 @@ class Auth extends Component {
       query: `
       mutation CreateUser($email: String!, $password: String!, $first_name: String!, $last_name: String!, $username: String!){
         createUser(userInput: {email: $email, password: $password, first_name: $first_name, last_name: $last_name, username: $username}) {
-          _id
-          email
+          userId
+          token
+          tokenExpiration
           username
         }
       }
@@ -211,22 +218,34 @@ class Auth extends Component {
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
-          throw new Error("Failed");
+          this.MySwal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Failed!: Something went wrong.',
+            footer: '<p>Please check your input!</p>'
+          })
         }
         return res.json();
       })
       .then((resData) => {
-        if (resData.data.login.token) {
+        console.log(resData)
+        console.log("token:", resData.data.createUser.token)
+        if (resData.data.createUser.token) {
           this.context.login(
-            resData.data.login.token,
-            resData.data.login.userId,
-            resData.data.login.tokenExpiration,
-            resData.data.login.username
+            resData.data.createUser.token,
+            resData.data.createUser.userId,
+            resData.data.createUser.tokenExpiration,
+            resData.data.createUser.username
           );
         }
       })
       .catch((err) => {
-        console.log(err);
+        this.MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Failed!: Something went wrong.',
+          footer: `<p>ERROR: ${" "} ${err}</p>`
+        })
       });
   };
 
@@ -235,7 +254,6 @@ class Auth extends Component {
   };
 
   handleEventButton = () => {
-    console.log("button clicked!!!");
     this.setState({ signingIn: true });
   };
 
@@ -284,7 +302,7 @@ class Auth extends Component {
                   <h1>Sign in</h1>
                   <div className="welcome__text">
                     <h4>Welcome Back!</h4>
-                    <p>Please login with your info</p>
+                    <h4>Please login with your info</h4>
                   </div>
                   <label htmlFor="email">Email</label>
                   <input

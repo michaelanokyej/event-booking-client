@@ -5,6 +5,8 @@ import Backdrop from "../components/Backdrop/Backdrop";
 import AuthContext from "../context/auth-context";
 import EventList from "../components/Events/EventList/EventList";
 import Spinner from "../components/Spinner/Spinner";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 class Events extends Component {
   state = {
@@ -15,6 +17,9 @@ class Events extends Component {
   };
 
   isActive = true;
+
+  MySwal = withReactContent(Swal)
+
 
   static contextType = AuthContext;
 
@@ -57,14 +62,13 @@ class Events extends Component {
       return;
     }
 
-    const event = {
-      title,
-      price,
-      date,
-      description,
-      category
-    };
-    console.log(event);
+    // const event = {
+    //   title,
+    //   price,
+    //   date,
+    //   description,
+    //   category
+    // };
 
     const requestBody = {
       query: `
@@ -105,7 +109,6 @@ class Events extends Component {
         return res.json();
       })
       .then((resData) => {
-        console.log("response:", resData)
         this.setState((prevState) => {
           const updatedEvents = [...prevState.events];
           updatedEvents.push({
@@ -121,9 +124,19 @@ class Events extends Component {
           });
           return { events: updatedEvents };
         });
+        this.MySwal.fire({
+          icon: 'success',
+          title: 'Created!',
+          text: `Your event: ${resData.data.createEvent.title} has been created!`,
+        })
       })
       .catch((err) => {
-        console.log(err);
+        this.MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Failed!: Something went wrong.',
+          footer: `<p>ERROR: ${" "} ${err}</p>`
+        })
       });
   };
 
@@ -162,17 +175,22 @@ class Events extends Component {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData.data.events)
+
         const events = resData.data.events;
         if(this.isActive) {
         this.setState({ events, isLoading: false });
         }
       })
       .catch((err) => {
-        console.log(err);
         if(this.isActive) {
         this.setState({ isLoading: false });
         }
+        this.MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Failed!: Something went wrong.',
+          footer: `<p>ERROR: ${" "} ${err}</p>`
+        })
       });
   };
 
@@ -215,16 +233,30 @@ class Events extends Component {
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
-          throw new Error("Failed");
+          this.MySwal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Failed!: Something went wrong.',
+            footer: '<p>Please check your input!</p>'
+          })
         }
         return res.json();
       })
       .then((resData) => {
-        console.log(resData)
+        this.MySwal.fire({
+          icon: 'success',
+          title: 'Booked!',
+          text: "Your booking was successful!!!",
+        })
       this.setState({selectedEvent: null})
       })
       .catch((err) => {
-        console.log(err);
+        this.MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Failed!: Something went wrong.',
+          footer: `<p>ERROR: ${" "} ${err}</p>`
+        })
       });
   };
 

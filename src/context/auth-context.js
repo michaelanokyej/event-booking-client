@@ -4,5 +4,7 @@ export default React.createContext({
   token: null,
   userid: null,
   login: (token, userId, expiration) => {},
-  logout: () => {}
+  logout: () => {},
+  backDropClickHandler: () => {},
+  drawerToggleClickHandler: () => {},
 })

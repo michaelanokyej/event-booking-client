@@ -14,8 +14,8 @@
 }
 
 .bookings-control button.active {
-  border-bottom-color: rgb(44, 211, 203);
-  color: rgb(44, 211, 203);
+  border-bottom-color: #ED5565;
+  color: #ED5565;
 }
 
 .bookings-control button:focus {

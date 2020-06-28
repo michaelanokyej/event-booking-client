@@ -24,9 +24,10 @@ body {
 
 .form-actions button,
 .btn {
-  background: #d6be80;
+  background: #ED5565;
+  color: rgb(236, 231, 231);
   font: inherit;
-  border: 1px solid #d6be80;;
+  border: 1px solid #ED5565;
   border-radius: 3px;
   padding: 0.25rem 1rem;
   margin-right: 1rem;
