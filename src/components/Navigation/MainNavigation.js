@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./MainNavigation.css";
 import AuthContext from "../../context/auth-context";
-import DrawerToggleButton from "../SideDrawer/DrawerToggleButton";
+// import DrawerToggleButton from "../SideDrawer/DrawerToggleButton";
 
 const mainNavigation = (props) => {
   return (
@@ -13,7 +13,7 @@ const mainNavigation = (props) => {
             <nav className="toolbar__navigation">
               <div className="toolbar__logo">
                 <h1>
-                  <NavLink to="/">Evently</NavLink>
+                  <NavLink to="/">evently</NavLink>
                 </h1>
               </div>
               <div className="spacer" />
@@ -50,9 +50,9 @@ const mainNavigation = (props) => {
                   )}
                 </ul>
               </div>
-              <div className="toolbar__toggle-button">
+              {/* <div className="toolbar__toggle-button">
                 <DrawerToggleButton />
-              </div>
+              </div> */}
             </nav>
           </header>
         );

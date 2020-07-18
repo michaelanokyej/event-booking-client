@@ -35,3 +35,9 @@
     left: calc((100% - 30rem) / 2);
   }
 }
+
+@media (max-width: 768px) {
+  .modal {
+    top: 5vh;
+  }
+}

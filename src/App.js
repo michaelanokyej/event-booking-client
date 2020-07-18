@@ -7,8 +7,8 @@ import Bookings from "./pages/Bookings";
 import MainNavigation from "./components/Navigation/MainNavigation";
 import AuthContext from "./context/auth-context";
 import Footer from "./components/Footer/Footer";
-import SideDrawer from "./components/SideDrawer/SideDrawer";
-import BackDrop from "./components/Backdrop/Backdrop";
+// import SideDrawer from "./components/SideDrawer/SideDrawer";
+// import BackDrop from "./components/Backdrop/Backdrop";
 import { tokenService } from "./components/TokenService";
 
 class App extends Component {
@@ -24,9 +24,6 @@ class App extends Component {
   login = (token, userId, expiration, username) => {
     tokenService.create(token);
     tokenService.storeUser(username, userId);
-    console.log("token in context:", token);
-    console.log("userId in context:", userId);
-    console.log("username in context:", username);
     this.setState({ token, userId, expiration, username });
   };
 
@@ -40,22 +37,22 @@ class App extends Component {
     });
   };
 
-  drawerToggleClickHandler = () => {
-    this.setState(prevState => {
-      return { sideDrawerOpen: !prevState.sideDrawerOpen };
-    });
-  };
+  // drawerToggleClickHandler = () => {
+  //   this.setState(prevState => {
+  //     return { sideDrawerOpen: !prevState.sideDrawerOpen };
+  //   });
+  // };
 
-  backDropClickHandler = () => {
-    this.setState({ sideDrawerOpen: false });
-  };
+  // backDropClickHandler = () => {
+  //   this.setState({ sideDrawerOpen: false });
+  // };
 
   render() {
-    let backDrop;
+    // let backDrop;
 
-    if (this.state.sideDrawerOpen) {
-      backDrop = <BackDrop />;
-    }
+    // if (this.state.sideDrawerOpen) {
+    //   backDrop = <BackDrop />;
+    // }
     return (
       <BrowserRouter>
         <React.Fragment>
@@ -67,13 +64,13 @@ class App extends Component {
               username: this.state.username,
               login: this.login,
               logout: this.logout,
-              backDropClickHandler: this.backDropClickHandler,
-              drawerToggleClickHandler: this.drawerToggleClickHandler,
+              // backDropClickHandler: this.backDropClickHandler,
+              // drawerToggleClickHandler: this.drawerToggleClickHandler,
             }}
           >
             <MainNavigation />
-            <SideDrawer show={this.state.sideDrawerOpen} />
-            {backDrop}
+            {/* <SideDrawer show={this.state.sideDrawerOpen} />
+            {backDrop} */}
             <main className="main-content">
               <Switch>
                 {!this.state.token && <Redirect from="/" to="/auth" exact />}

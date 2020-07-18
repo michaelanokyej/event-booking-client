@@ -23,7 +23,7 @@
   font-size: 1rem
 }
 
-.toolbar__logo h1 a{
+.toolbar__logo h1 a {
   text-decoration: none;
   color: #ED5565;
 }
@@ -76,18 +76,36 @@
   border-radius: 5px;
 }
 
+.main-navigation__items a:focus,
+.main-navigation__items button:focus {
+  outline: none;
+}
+
 @media (max-width: 768px) {
-  .main-navigation__items {
+  .main-navigation__items, .spacer {
     display: none;
+  }
+
+  .main-navigation__toolbar {
+    margin: 0;
+    padding: 0;
+  }
+
+  .toolbar__navigation {
+    justify-content: center;
   }
 }
 
 @media (min-width: 769px) {
-  .toolbar__toggle-button {
+
+  
+
+  
+  /* .toolbar__toggle-button {
     display: none;
   }
 
   .toolbar__logo {
     margin-left: 0;
-  }
+  } */
 }

@@ -7,6 +7,30 @@
   width: 95%;
 }
 
+.welcome__div h1 {
+  color: #ED5565;
+}
+
+.welcome__div button {
+  background: #ED5565;
+  color: rgb(236, 231, 231);
+  width: 5rem;
+  height: 1.5rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.welcome__div button:hover,
+.welcome__div button:active {
+  background: #b34e58;
+  color: rgb(250, 246, 246);
+}
+
+.welcome__div button:focus {
+  outline: none;
+}
+
 .construction_logo {
   margin: 10px auto;
   border-radius: 25px;
@@ -69,4 +93,8 @@ input {
   padding: 12px 15px;
   margin: 8px 0;
   width: 80%;
+}
+
+input:focus {
+  outline: none;
 }

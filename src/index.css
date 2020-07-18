@@ -41,8 +41,8 @@ body {
 .btn:hover,
 .btn:active,
 .btn:focus {
-  background: #d3c39c;
-  border-color: #d3c39c;
+  background: #94323c;
+  border-color: #94323c;
   color: #0f0c04;
   outline: none;
 }
