@@ -6,7 +6,8 @@ import AuthContext from "../context/auth-context";
 import EventList from "../components/Events/EventList/EventList";
 import Spinner from "../components/Spinner/Spinner";
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import withReactContent from 'sweetalert2-react-content';
+import config from "../config";
 
 class Events extends Component {
   state = {
@@ -94,13 +95,14 @@ class Events extends Component {
 
     const token = this.context.token;
 
-    fetch("http://localhost:5000/graphql", {
+    fetch(`${config.API_ENDPOINT}`, {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
+      mode: "no-cors"
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
@@ -161,12 +163,13 @@ class Events extends Component {
       `,
     };
 
-    fetch("http://localhost:5000/graphql", {
+    fetch(`${config.API_ENDPOINT}`, {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
       },
+      mode: "no-cors"
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
@@ -223,13 +226,14 @@ class Events extends Component {
     };
 
 
-    fetch("http://localhost:5000/graphql", {
+    fetch(`${config.API_ENDPOINT}`, {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + this.context.token
       },
+      mode: "no-cors"
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {

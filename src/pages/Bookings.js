@@ -6,6 +6,7 @@ import BookingsChart from "../components/Bookings/BookingsChart/BookingsChart";
 import BookingsControl from "../components/Bookings/BookingsControls/BookingsControls";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import config from "../config";
 
 class Bookings extends Component {
   state = {
@@ -41,13 +42,14 @@ class Bookings extends Component {
       `,
     };
 
-    fetch("http://localhost:5000/graphql", {
+    fetch(`${config.API_ENDPOINT}`, {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + this.context.token,
       },
+      mode: "no-cors"
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
@@ -86,13 +88,14 @@ class Bookings extends Component {
       },
     };
 
-    fetch("http://localhost:5000/graphql", {
+    fetch(`${config.API_ENDPOINT}`, {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + this.context.token,
       },
+      mode: "no-cors"
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {

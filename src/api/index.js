@@ -328,3 +328,5 @@ export const deleteBookingHandler = (bookingId) => {
       this.setState({ isLoading: false });
     });
 };
+
+export const productionURL = "https://agile-basin-20637.herokuapp.com/graphql"
