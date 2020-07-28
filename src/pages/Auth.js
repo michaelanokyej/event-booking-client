@@ -66,7 +66,6 @@ class Auth extends Component {
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "no-cors"
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
@@ -137,7 +136,6 @@ class Auth extends Component {
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "no-cors"
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
@@ -218,7 +216,6 @@ class Auth extends Component {
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "no-cors"
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {

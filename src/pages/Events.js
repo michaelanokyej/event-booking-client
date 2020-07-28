@@ -102,7 +102,6 @@ class Events extends Component {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
-      mode: "no-cors"
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
@@ -169,7 +168,6 @@ class Events extends Component {
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "no-cors"
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
@@ -233,7 +231,6 @@ class Events extends Component {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + this.context.token
       },
-      mode: "no-cors"
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
