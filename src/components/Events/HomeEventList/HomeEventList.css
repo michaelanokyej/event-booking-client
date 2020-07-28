@@ -60,6 +60,8 @@
   font-size: 0.8125rem;
   border-radius: 5px;
   cursor: pointer;
+  color: #ED5565;
+  background: rgb(236, 231, 231);
 }
 
 @media (max-width: 850px) {

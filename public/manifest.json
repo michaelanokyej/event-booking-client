@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Evently",
+  "name": "Evently - Event booking made easy",
   "icons": [
     {
       "src": "favicon.ico",
